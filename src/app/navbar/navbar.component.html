@@ -1,0 +1,47 @@
+<nav class="bg-blue-600 p-4 text-white flex justify-between items-center">
+  <div class="flex items-center space-x-4">
+    <h1 class="text-lg font-bold">Gestión de Contactos</h1>
+
+      <a
+        routerLink="/welcome"
+        class="hover:text-yellow-300 px-3 py-2 rounded"
+        routerLinkActive="bg-blue-700"
+      >
+        Inicio
+      </a>
+    
+  </div>
+
+  <div class="flex space-x-4 items-center">
+    @if (currentUser)
+    {
+      <a
+        routerLink="/addcontacts"
+        class="hover:text-yellow-300 px-3 py-2 rounded"
+        routerLinkActive="bg-blue-700"
+      >
+        Añadir Contactos
+      </a>
+      <a
+        routerLink="/contacts"
+        class="hover:text-yellow-300 px-3 py-2 rounded"
+        routerLinkActive="bg-blue-700"
+      >
+        Contactos
+      </a>
+      <span class="flex items-center space-x-3">
+        <span>{{ currentUser.email.split('@')[0] }}</span>
+        <button class="bg-blue-800 px-4 py-2 rounded" (click)="logout()">Cerrar sesión</button>
+      </span>
+    }
+    @else
+    {
+      <span>
+        <button routerLink="/login" class="bg-blue-800 px-4 py-2 rounded">Iniciar sesión</button>
+        <button routerLink="/register" class="bg-blue-800 px-4 py-2 rounded">Registrarse</button>
+      </span>
+    }
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

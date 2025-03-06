@@ -1,0 +1,55 @@
+<div class="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-bold mb-4">Iniciar Sesión</h2>
+    <form (ngSubmit)="save()" #myForm="ngForm">
+      <div *ngIf="message" class="p-2 mb-4 bg-red-100 text-red-800 rounded">
+        {{ message }}
+      </div>
+      <div *ngIf="successMessage" class="p-2 mb-4 bg-green-100 text-black-800 rounded">
+        {{ successMessage }}
+      </div>
+      <input
+        type="email"
+        name="email"
+        placeholder="Correo electrónico"
+        class="w-full border p-2 mb-2 rounded"
+        ngModel
+        required
+        email
+      />
+      @if (notValid('email')) {
+        <span class="text-red-600 text-sm">
+          @if (myForm.controls['email'].errors?.['required']) {
+            El correo es obligatorio.
+          }
+          @if (myForm.controls['email'].errors?.['email']) {
+            El correo no tiene un formato válido.
+          }
+        </span>
+      }
+  
+      <input
+        type="password"
+        name="password"
+        placeholder="Contraseña"
+        class="w-full border p-2 mb-2 rounded"
+        ngModel
+        required
+        minlength="6"
+      />
+      @if (notValid('password')) {
+        <span class="text-red-600 text-sm">
+          @if (myForm.controls['password'].errors?.['required']) {
+            La contraseña es obligatoria.
+          }
+          @if (myForm.controls['password'].errors?.['minlength']) {
+            La contraseña debe tener mínimo 6 caracteres.
+          }
+        </span>
+      }
+  
+      <button [disabled]="myForm.invalid" class="w-full bg-blue-600 text-white p-2 rounded" type="submit">
+        Iniciar sesión
+      </button>
+    </form>
+  </div>
+  
